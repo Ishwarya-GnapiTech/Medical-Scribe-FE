@@ -1,25 +1,60 @@
-import { ClipboardPen, PenLine, MoreHorizontal } from "lucide-react";
+import PatientHeader from "../components/header/PatientHeader";
+import NavigationTabs from "../components/header/NavigationTabs";
 
-const SoapToolbar = () => {
+import StatusBar from "../components/centerPanel/StatusBar";
+import SoapToolbar from "../components/centerPanel/SoapToolbar";
+import SoapEditor from "../components/centerPanel/SoapEditor";
+import PromptInput from "../components/centerPanel/PromptInput";
+
+import MissedPrompts from "../components/rightSidebar/MissedPrompts";
+import CoverageChecklist from "../components/rightSidebar/CoverageChecklist";
+
+const SoapNotePage = () => {
   return (
-    <div className="flex items-center justify-between border-b p-3 bg-white rounded-t-xl">
-      <div className="flex items-center gap-2">
-        <button className="flex items-center gap-2 border border-gray-200 px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-50">
-          <ClipboardPen size={16} />
-          SOAP Note
-        </button>
+    <div className="min-h-screen bg-[#f5f6f8]">
+      {/* Main Container */}
+      <div className="max-w-[1600px] mx-auto bg-white min-h-screen shadow-sm">
+        
+        {/* Header */}
+        <PatientHeader />
 
-        <button className="flex items-center gap-2 border border-gray-200 px-3 py-2 rounded-lg text-sm text-gray-700 hover:bg-gray-50">
-          <PenLine size={16} />
-          Detailed
-        </button>
+        {/* Navigation */}
+        <NavigationTabs />
 
-        <button className="border border-gray-200 px-3 py-2 rounded-lg hover:bg-gray-50">
-          <MoreHorizontal size={16} />
-        </button>
+        {/* Content */}
+        <div className="px-6 py-5">
+          {/* Status Bar */}
+          <StatusBar />
+
+          {/* Main Grid */}
+          <div className="grid grid-cols-[1fr_340px] gap-6 mt-4">
+            
+            {/* LEFT PANEL */}
+            <div className="flex flex-col">
+              
+              {/* Editor Card */}
+              <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+                <SoapToolbar />
+                <SoapEditor />
+              </div>
+
+              {/* Prompt Input */}
+              <div className="mt-4">
+                <PromptInput />
+              </div>
+            </div>
+
+            {/* RIGHT SIDEBAR */}
+            <div className="flex flex-col gap-4">
+              <MissedPrompts />
+              <CoverageChecklist />
+            </div>
+
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default SoapToolbar;
+export default SoapNotePage;
