@@ -1,29 +1,36 @@
 const SoapEditor = () => {
   return (
-    <div className="bg-white p-6 min-h-[700px] overflow-y-auto">
+    <div className="bg-white p-6 min-h-[750px] overflow-y-auto">
       <div className="space-y-8">
+
         {/* SUBJECTIVE */}
         <section>
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
-            Subjective
-          </h2>
+          <div className="flex items-center gap-2 mb-4">
+            <h2 className="text-lg font-semibold text-gray-900">
+              Subjective
+            </h2>
 
-          <div className="space-y-3 text-sm leading-7 text-gray-700">
-            <p>
-              <span className="font-semibold">Chief Complaint:</span>
-              {" "}Erectile dysfunction and decreased penile sensation.
+            <span className="px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs">
+              Covered
+            </span>
+          </div>
+
+          <div className="border rounded-xl p-4 bg-gray-50">
+            <p className="text-sm leading-7 text-gray-700">
+              <span className="font-semibold">Chief Complaint:</span>{" "}
+              Erectile dysfunction and decreased penile sensation.
             </p>
 
-            <p>
+            <p className="text-sm leading-7 text-gray-700 mt-3">
               <span className="font-semibold">
                 History of Present Illness:
               </span>{" "}
               Patient reports difficulty maintaining erections for
               approximately six months. Symptoms have gradually worsened.
-              Denies pain, trauma, or urinary symptoms.
+              Denies pain, trauma, urinary symptoms, or recent infections.
             </p>
 
-            <p>
+            <p className="text-sm leading-7 text-gray-700 mt-3">
               <span className="font-semibold">
                 Review of Systems:
               </span>{" "}
@@ -35,54 +42,77 @@ const SoapEditor = () => {
 
         {/* OBJECTIVE */}
         <section>
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
-            Objective
-          </h2>
+          <div className="flex items-center gap-2 mb-4">
+            <h2 className="text-lg font-semibold text-gray-900">
+              Objective
+            </h2>
 
-          <div className="space-y-3 text-sm leading-7 text-gray-700">
-            <p>
+            <span className="px-2 py-1 rounded-full bg-yellow-100 text-yellow-700 text-xs">
+              Partial
+            </span>
+          </div>
+
+          <div className="border rounded-xl p-4 bg-gray-50">
+            <p className="text-sm leading-7 text-gray-700">
               Physical examination deferred during this encounter.
             </p>
 
-            <p>
+            <p className="text-sm leading-7 text-gray-700 mt-3">
               No acute distress observed.
+            </p>
+
+            <p className="text-sm leading-7 text-red-500 mt-3">
+              Missing: Vitals and diagnostic findings.
             </p>
           </div>
         </section>
 
         {/* ASSESSMENT */}
         <section>
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
-            Assessment
-          </h2>
+          <div className="flex items-center gap-2 mb-4">
+            <h2 className="text-lg font-semibold text-gray-900">
+              Assessment
+            </h2>
 
-          <div className="space-y-3 text-sm leading-7 text-gray-700">
-            <p>
+            <span className="px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs">
+              Covered
+            </span>
+          </div>
+
+          <div className="border rounded-xl p-4 bg-gray-50">
+            <p className="text-sm leading-7 text-gray-700">
               Erectile dysfunction of unclear etiology.
             </p>
 
-            <p>
-              Differential diagnosis includes vascular, neurologic,
-              psychogenic, and hormonal causes.
+            <p className="text-sm leading-7 text-gray-700 mt-3">
+              Differential diagnosis includes vascular,
+              neurologic, psychogenic and hormonal causes.
             </p>
           </div>
         </section>
 
         {/* PLAN */}
         <section>
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
-            Plan
-          </h2>
+          <div className="flex items-center gap-2 mb-4">
+            <h2 className="text-lg font-semibold text-gray-900">
+              Plan
+            </h2>
 
-          <div className="space-y-3 text-sm leading-7 text-gray-700">
-            <ul className="list-disc pl-5">
+            <span className="px-2 py-1 rounded-full bg-red-100 text-red-700 text-xs">
+              Missing
+            </span>
+          </div>
+
+          <div className="border rounded-xl p-4 bg-gray-50">
+            <ul className="list-disc pl-5 text-sm text-gray-700 space-y-2">
               <li>Order testosterone level.</li>
               <li>Order HbA1c and lipid profile.</li>
               <li>Consider urology referral.</li>
-              <li>Follow up in 4 weeks.</li>
+              <li>Follow-up appointment in 4 weeks.</li>
             </ul>
           </div>
         </section>
+
       </div>
     </div>
   );
