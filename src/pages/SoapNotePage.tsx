@@ -8,12 +8,14 @@ import PromptInput from "../components/centerPanel/PromptInput";
 
 import MissedPrompts from "../components/rightSidebar/MissedPrompts";
 import CoverageChecklist from "../components/rightSidebar/CoverageChecklist";
+import Sidebar from "../components/Sidebar/Sidebar";
 
 const SoapNotePage = () => {
   return (
     <div className="min-h-screen bg-[#F7F8FA]">
       <div className="max-w-[1800px] mx-auto">
-        
+
+        <Sidebar />
         {/* Header */}
         <PatientHeader />
 
@@ -22,7 +24,7 @@ const SoapNotePage = () => {
 
         {/* Main Content */}
         <div className="px-6 py-5">
-          
+
           {/* Status Bar */}
           <StatusBar />
 
