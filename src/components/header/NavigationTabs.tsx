@@ -11,7 +11,7 @@ import {
   Play,
   Pause
 } from "lucide-react";
-
+ 
 // ================= 1. DYNAMIC CONTEXT VIEW COMPONENT =================
 const PatientContextView: React.FC = () => (
   <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm mt-4 animate-in fade-in duration-200">
@@ -36,43 +36,43 @@ const PatientContextView: React.FC = () => (
     </div>
   </div>
 );
-
+ 
 // ================= 2. DYNAMIC TRANSCRIPT VIEW COMPONENT =================
 const TranscriptAudioView: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-
+ 
   // Synchronized allergy consultation script segments
   const recordingSegments = [
-    { 
-      id: 1, 
-      time: "00:01", 
-      speaker: "Clinician", 
-      speakerType: "clinician", 
-      text: "Good afternoon. I see from your intake notes that your seasonal allergies are hitting you pretty hard this week. Tell me a bit more about the sinus pressure." 
+    {
+      id: 1,
+      time: "00:01",
+      speaker: "Clinician",
+      speakerType: "clinician",
+      text: "Good afternoon. I see from your intake notes that your seasonal allergies are hitting you pretty hard this week. Tell me a bit more about the sinus pressure."
     },
-    { 
-      id: 2, 
-      time: "00:14", 
-      speaker: "Patient", 
-      speakerType: "patient", 
-      text: "Yes, Doctor, it's been miserable. It feels like a constant heavy pressure right behind my eyes and forehead. My usual over-the-counter allergy pills aren't doing anything this time." 
+    {
+      id: 2,
+      time: "00:14",
+      speaker: "Patient",
+      speakerType: "patient",
+      text: "Yes, Doctor, it's been miserable. It feels like a constant heavy pressure right behind my eyes and forehead. My usual over-the-counter allergy pills aren't doing anything this time."
     },
-    { 
-      id: 3, 
-      time: "00:29", 
-      speaker: "Clinician", 
-      speakerType: "clinician", 
-      text: "Understood. Have you noticed any nasal congestion, changes in your vision, or a fever accompanied by that headache?" 
+    {
+      id: 3,
+      time: "00:29",
+      speaker: "Clinician",
+      speakerType: "clinician",
+      text: "Understood. Have you noticed any nasal congestion, changes in your vision, or a fever accompanied by that headache?"
     },
-    { 
-      id: 4, 
-      time: "00:38", 
-      speaker: "Patient", 
-      speakerType: "patient", 
-      text: "No fever, thankfully. Just a lot of clear runny nose, a ton of sneezing, and a scratchy, dry cough that keeps me awake at night." 
+    {
+      id: 4,
+      time: "00:38",
+      speaker: "Patient",
+      speakerType: "patient",
+      text: "No fever, thankfully. Just a lot of clear runny nose, a ton of sneezing, and a scratchy, dry cough that keeps me awake at night."
     }
   ];
-
+ 
   return (
     <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm mt-4 animate-in fade-in duration-200">
       <div className="flex items-center justify-between border-b border-gray-100 pb-4 mb-4">
@@ -80,8 +80,8 @@ const TranscriptAudioView: React.FC = () => {
           <Mic size={20} className="text-violet-600" />
           <h2>Diarized Audio Transcript</h2>
         </div>
-        
-        <button 
+       
+        <button
           onClick={() => setIsPlaying(!isPlaying)}
           className={`flex items-center gap-2 px-4 py-1.5 rounded-xl text-xs font-semibold shadow-sm transition-all ${
             isPlaying ? "bg-amber-500 text-white" : "bg-emerald-500 text-white"
@@ -91,14 +91,14 @@ const TranscriptAudioView: React.FC = () => {
           <span>{isPlaying ? "Pause Session Audio" : "Play Session Recording"}</span>
         </button>
       </div>
-
+ 
       <div className="space-y-3 max-h-[400px] overflow-y-auto pr-1">
         {recordingSegments.map((segment) => (
-          <div 
-            key={segment.id} 
+          <div
+            key={segment.id}
             className={`p-3 rounded-xl border transition-colors cursor-pointer hover:bg-gray-50/80 ${
-              segment.speakerType === "clinician" 
-                ? "bg-gray-50/40 border-gray-100" 
+              segment.speakerType === "clinician"
+                ? "bg-gray-50/40 border-gray-100"
                 : "bg-violet-50/20 border-violet-100/50"
             }`}
           >
@@ -119,16 +119,16 @@ const TranscriptAudioView: React.FC = () => {
     </div>
   );
 };
-
+ 
 // ================= MAIN TABS ORCHESTRATOR COMPONENT =================
 const NavigationTabs: React.FC = () => {
-  const [dateTime, setDateTime] = useState<string>("2026-06-17T13:10"); 
+  const [dateTime, setDateTime] = useState<string>("2026-06-17T13:10");
   const [selectedLanguage, setSelectedLanguage] = useState<string>("English");
   const [activeTab, setActiveTab] = useState<"context" | "transcript" | "soap">("soap");
-  
+ 
   const dateInputRef = useRef<HTMLInputElement>(null);
-  const languagesList = ["English", "Spanish (Español)", "French (Français)", "German (Deutsch)", "Mandarin (中文)"];
-
+  const languagesList = ["English", "Tamil"];
+ 
   const formatDisplayDate = (dateString: string): string => {
     if (!dateString) return "Select Date & Time";
     const date = new Date(dateString);
@@ -136,12 +136,12 @@ const NavigationTabs: React.FC = () => {
     const yesterday = new Date(today);
     yesterday.setDate(yesterday.getDate() - 1);
     const timeString = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }).toLowerCase();
-
+ 
     if (date.toDateString() === yesterday.toDateString()) return `Yesterday ${timeString}`;
     if (date.toDateString() === today.toDateString()) return `Today ${timeString}`;
     return `${date.toLocaleDateString([], { month: 'short', day: 'numeric' })} ${timeString}`;
   };
-
+ 
   return (
     <>
       {/* Utilities Metadata Info Row */}
@@ -151,7 +151,7 @@ const NavigationTabs: React.FC = () => {
           <span className="font-medium text-[13px]">{formatDisplayDate(dateTime)}</span>
           <input ref={dateInputRef} type="datetime-local" value={dateTime} onChange={(e) => setDateTime(e.target.value)} className="absolute opacity-0 pointer-events-none w-0 h-0" />
         </div>
-
+ 
         <div className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 transition-colors relative">
           <Languages size={15} className="text-gray-400" />
           <select value={selectedLanguage} onChange={(e) => setSelectedLanguage(e.target.value)} className="bg-transparent cursor-pointer font-medium text-[13px] focus:outline-none appearance-none pr-4">
@@ -159,16 +159,16 @@ const NavigationTabs: React.FC = () => {
           </select>
           <span className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-[10px] text-gray-400">▼</span>
         </div>
-
+ 
         <button onClick={() => alert("Redirecting to clinical upgrade wizard portal...")} className="bg-violet-600 hover:bg-violet-700 text-white text-xs font-semibold px-3 py-1 rounded-md border-none active:scale-[0.98] transition-transform">
           Upgrade to Clinician
         </button>
       </div>
-
+ 
       {/* Navigation Tab Selection Triggers */}
       <div className="border-b border-gray-200 px-6 bg-white select-none">
         <div className="flex items-center gap-3">
-          <button 
+          <button
             onClick={() => setActiveTab("context")}
             className={`flex items-center gap-2 px-4 text-sm font-medium transition-all ${
               activeTab === "context"
@@ -179,8 +179,8 @@ const NavigationTabs: React.FC = () => {
             <FileText size={17} className={activeTab === "context" ? "text-violet-600" : ""} />
             Context
           </button>
-
-          <button 
+ 
+          <button
             onClick={() => setActiveTab("transcript")}
             className={`flex items-center gap-2 px-4 text-sm font-medium transition-all ${
               activeTab === "transcript"
@@ -191,8 +191,8 @@ const NavigationTabs: React.FC = () => {
             <AudioLines size={17} className={activeTab === "transcript" ? "text-violet-600" : ""} />
             Transcript
           </button>
-
-          <button 
+ 
+          <button
             onClick={() => setActiveTab("soap")}
             className={`flex items-center gap-2 px-4 text-sm font-medium transition-all ${
               activeTab === "soap"
@@ -203,13 +203,13 @@ const NavigationTabs: React.FC = () => {
             <ClipboardPen size={17} className={activeTab === "soap" ? "text-violet-600" : ""} />
             SOAP Note
           </button>
-
+ 
           <button onClick={() => alert("Adding custom extension view...")} className="ml-1 p-2 rounded-lg hover:bg-gray-100 text-gray-500">
             <Plus size={18} />
           </button>
         </div>
       </div>
-
+ 
       {/* Interactive Display Workspaces */}
       <div className="p-6">
         {activeTab === "context" && <PatientContextView />}
@@ -223,5 +223,6 @@ const NavigationTabs: React.FC = () => {
     </>
   );
 };
-
+ 
 export default NavigationTabs;
+ 
