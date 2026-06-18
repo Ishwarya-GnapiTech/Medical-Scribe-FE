@@ -11,33 +11,55 @@ import CoverageChecklist from "../components/rightSidebar/CoverageChecklist";
 
 const SoapNotePage = () => {
   return (
-    <div className="min-h-screen bg-[#f5f6f8]">
-      <div className="max-w-[1600px] mx-auto bg-white min-h-screen shadow-sm">
+    <div className="min-h-screen bg-[#F7F8FA]">
+      <div className="max-w-[1800px] mx-auto">
+        
+        {/* Header */}
         <PatientHeader />
+
+        {/* Navigation */}
         <NavigationTabs />
 
+        {/* Main Content */}
         <div className="px-6 py-5">
+          
+          {/* Status Bar */}
           <StatusBar />
 
-          <div className="grid grid-cols-[1fr_340px] gap-6 mt-4">
-            {/* Left Panel */}
+          {/* Main Layout */}
+          <div className="grid grid-cols-[75%_25%] gap-6 mt-4">
+
+            {/* LEFT SECTION */}
             <div className="flex flex-col">
-              <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+
+              {/* SOAP Editor Card */}
+              <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
                 <SoapToolbar />
                 <SoapEditor />
               </div>
 
-              <div className="mt-4">
+              {/* Prompt Input */}
+              <div className="mt-5">
                 <PromptInput />
               </div>
+
             </div>
 
-            {/* Right Panel */}
-            <div className="flex flex-col gap-4">
-              <MissedPrompts />
-              <CoverageChecklist />
+            {/* RIGHT SIDEBAR */}
+            <div className="flex flex-col gap-6">
+
+              <div className="shadow-sm">
+                <MissedPrompts />
+              </div>
+
+              <div className="shadow-sm">
+                <CoverageChecklist />
+              </div>
+
             </div>
+
           </div>
+
         </div>
       </div>
     </div>

@@ -2,18 +2,20 @@ import { MoreHorizontal } from "lucide-react";
 
 const SoapToolbar = () => {
   return (
-    <div className="flex items-center justify-between px-5 py-3 border-b bg-white">
+    <div className="flex items-center justify-between px-6 py-4 border-b bg-white">
       <div className="flex items-center gap-3">
-        <button className="px-4 py-2 bg-gray-100 rounded-lg text-sm font-medium">
+        <span className="font-medium text-gray-900">
           SOAP Note
-        </button>
+        </span>
 
-        <button className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-lg">
+        <span className="text-gray-300">|</span>
+
+        <span className="text-gray-500">
           Detailed
-        </button>
+        </span>
       </div>
 
-      <button className="p-2 hover:bg-gray-100 rounded-lg">
+      <button>
         <MoreHorizontal size={18} />
       </button>
     </div>

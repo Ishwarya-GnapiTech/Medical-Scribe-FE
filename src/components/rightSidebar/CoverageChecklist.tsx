@@ -1,137 +1,253 @@
-type ItemStatus = "covered" | "partial" | "missing";
+import { useState } from "react";
+import {
+  ChevronDown,
+  ChevronRight,
+  Check,
+} from "lucide-react";
 
-interface ChecklistItem {
-  name: string;
-  status: ItemStatus;
+interface Item {
+  label: string;
+  checked: boolean;
 }
-
-interface ChecklistSection {
-  title: string;
-  covered: number;
-  total: number;
-  items: ChecklistItem[];
-}
-
-const checklist: ChecklistSection[] = [
-  {
-    title: "S - Subjective",
-    covered: 5,
-    total: 7,
-    items: [
-      { name: "Chief Complaint", status: "covered" },
-      { name: "History of Present Illness", status: "covered" },
-      { name: "Review of Systems", status: "covered" },
-      { name: "Pain Assessment", status: "partial" },
-      { name: "Medications", status: "missing" },
-    ],
-  },
-  {
-    title: "O - Objective",
-    covered: 3,
-    total: 6,
-    items: [
-      { name: "Physical Exam", status: "covered" },
-      { name: "Vitals", status: "partial" },
-      { name: "Diagnostic Tests", status: "missing" },
-    ],
-  },
-  {
-    title: "A - Assessment",
-    covered: 2,
-    total: 4,
-    items: [
-      { name: "Diagnosis", status: "covered" },
-      { name: "Differential", status: "partial" },
-    ],
-  },
-  {
-    title: "P - Plan",
-    covered: 2,
-    total: 5,
-    items: [
-      { name: "Medication Plan", status: "covered" },
-      { name: "Follow Up", status: "partial" },
-    ],
-  },
-];
-
-const getDot = (status: ItemStatus) => {
-  switch (status) {
-    case "covered":
-      return "bg-green-500";
-    case "partial":
-      return "bg-yellow-400";
-    case "missing":
-      return "bg-red-500";
-    default:
-      return "bg-gray-400";
-  }
-};
 
 const CoverageChecklist = () => {
+  const [openSections, setOpenSections] = useState<string[]>([
+    "Subjective",
+  ]);
+
+  const [sections, setSections] = useState({
+    Subjective: [
+      {
+        label: "Chief Complaint",
+        checked: false,
+      },
+      {
+        label: "History of Present Illness",
+        checked: false,
+      },
+      {
+        label: "Review of Systems",
+        checked: false,
+      },
+      {
+        label: "Pain Assessment",
+        checked: false,
+      },
+      {
+        label: "Medications",
+        checked: false,
+      },
+    ],
+
+    Objective: [
+      {
+        label: "Physical Exam",
+        checked: false,
+      },
+      {
+        label: "Vitals",
+        checked: false,
+      },
+      {
+        label: "Diagnostic Tests",
+        checked: false,
+      },
+    ],
+
+    Assessment: [
+      {
+        label: "Diagnosis",
+        checked: false,
+      },
+      {
+        label: "Differential Diagnosis",
+        checked: false,
+      },
+    ],
+
+    Plan: [
+      {
+        label: "Medication Plan",
+        checked: false,
+      },
+      {
+        label: "Follow Up",
+        checked: false,
+      },
+    ],
+  });
+
+  const toggleSection = (section: string) => {
+    setOpenSections((prev) =>
+      prev.includes(section)
+        ? prev.filter((item) => item !== section)
+        : [...prev, section]
+    );
+  };
+
+  const toggleItem = (
+    sectionName: string,
+    index: number
+  ) => {
+    setSections((prev) => ({
+      ...prev,
+      [sectionName]: prev[
+        sectionName as keyof typeof prev
+      ].map((item, idx) =>
+        idx === index
+          ? {
+              ...item,
+              checked: !item.checked,
+            }
+          : item
+      ),
+    }));
+  };
+
   return (
-    <div className="bg-white border rounded-xl p-4">
+    <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+      {/* Header */}
       <div className="flex justify-between items-center mb-5">
         <h3 className="font-semibold text-gray-900">
           Coverage Checklist
         </h3>
 
-        <button className="text-xs text-gray-500">
+        <button className="text-sm text-gray-500 hover:text-gray-700">
           Collapse all
         </button>
       </div>
 
-      <div className="space-y-5">
-        {checklist.map((section) => (
-          <div key={section.title}>
-            <div className="flex justify-between mb-3">
-              <h4 className="font-medium text-sm">
-                {section.title}
-              </h4>
+      {/* Sections */}
+      <div className="space-y-4">
+        {Object.entries(sections).map(
+          ([sectionName, items]) => {
+            const isOpen =
+              openSections.includes(sectionName);
 
-              <span className="text-xs text-gray-500">
-                {section.covered}/{section.total}
-              </span>
-            </div>
-
-            <div className="space-y-2">
-              {section.items.map((item) => (
-                <div
-                  key={item.name}
-                  className="flex items-center gap-2 text-sm"
+            return (
+              <div key={sectionName}>
+                {/* Section Header */}
+                <button
+                  onClick={() =>
+                    toggleSection(sectionName)
+                  }
+                  className="w-full flex items-center gap-2 text-left"
                 >
-                  <div
-                    className={`w-2 h-2 rounded-full ${getDot(
-                      item.status
-                    )}`}
-                  />
+                  {isOpen ? (
+                    <ChevronDown size={16} />
+                  ) : (
+                    <ChevronRight size={16} />
+                  )}
 
-                  <span className="text-gray-700">
-                    {item.name}
+                  <span className="font-medium text-sm text-gray-800">
+                    {sectionName}
                   </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
+                </button>
+
+                {/* Section Items */}
+                {isOpen && (
+                  <div className="ml-6 mt-3 space-y-3">
+                    {items.map(
+                      (item: Item, index: number) => (
+                        <button
+                          key={item.label}
+                          onClick={() =>
+                            toggleItem(
+                              sectionName,
+                              index
+                            )
+                          }
+                          className="flex items-center gap-3 w-full text-left"
+                        >
+                          {/* Circle Checkbox */}
+                          <div
+                            className={`
+                              w-5 h-5
+                              rounded-full
+                              border-2
+                              flex
+                              items-center
+                              justify-center
+                              transition-all
+                              ${
+                                item.checked
+                                  ? "bg-green-500 border-green-500"
+                                  : "bg-white border-gray-400"
+                              }
+                            `}
+                          >
+                            {item.checked && (
+                              <Check
+                                size={12}
+                                strokeWidth={3}
+                                className="text-white"
+                              />
+                            )}
+                          </div>
+
+                          <span className="text-sm text-gray-700">
+                            {item.label}
+                          </span>
+                        </button>
+                      )
+                    )}
+                  </div>
+                )}
+              </div>
+            );
+          }
+        )}
       </div>
 
-      <div className="flex justify-center gap-5 mt-6 pt-4 border-t text-xs">
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-green-500" />
-          Covered
-        </div>
+      {/* Legend */}
+      <div className="mt-6 pt-4 border-t flex justify-center gap-8 text-xs">
 
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-yellow-400" />
-          Partial
-        </div>
+  {/* Covered */}
+  <label className="flex items-center gap-2 cursor-pointer">
+    <input type="checkbox" className="peer hidden" />
 
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-red-500" />
-          Missing
-        </div>
-      </div>
+    <div className="w-5 h-5 rounded-full border-2 border-green-500 flex items-center justify-center peer-checked:bg-green-500">
+      <Check
+        size={12}
+        strokeWidth={3}
+        className="text-white opacity-0 peer-checked:opacity-100"
+      />
+    </div>
+
+    <span>Covered</span>
+  </label>
+
+  {/* Partial */}
+  <label className="flex items-center gap-2 cursor-pointer">
+    <input type="checkbox" className="peer hidden" />
+
+    <div className="w-5 h-5 rounded-full border-2 border-yellow-500 flex items-center justify-center peer-checked:bg-yellow-500">
+      <Check
+        size={12}
+        strokeWidth={3}
+        className="text-white opacity-0 peer-checked:opacity-100"
+      />
+    </div>
+
+    <span>Partial</span>
+  </label>
+
+  {/* Not Covered */}
+  <label className="flex items-center gap-2 cursor-pointer">
+    <input type="checkbox" className="peer hidden" />
+
+    <div className="w-5 h-5 rounded-full border-2 border-gray-500 flex items-center justify-center peer-checked:bg-gray-500">
+      <Check
+        size={12}
+        strokeWidth={3}
+        className="text-white opacity-0 peer-checked:opacity-100"
+      />
+    </div>
+
+    <span>Not Covered</span>
+  </label>
+
+</div>
     </div>
   );
 };
