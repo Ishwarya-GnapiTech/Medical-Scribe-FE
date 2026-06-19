@@ -169,6 +169,7 @@ const CoverageChecklist = () => {
                               items-center
                               justify-center
                               transition-all
+                              flex-shrink-0
                               ${
                                 item.checked
                                   ? "bg-green-500 border-green-500"
@@ -199,55 +200,49 @@ const CoverageChecklist = () => {
         )}
       </div>
 
-      {/* Legend */}
-      <div className="mt-6 pt-4 border-t flex justify-center gap-8 text-xs">
+      {/* Legend Container Block - Styled to prevent squishing and overflow alignment */}
+      <div className="mt-6 pt-4 border-t flex flex-wrap justify-start gap-x-4 gap-y-2 text-xs text-gray-600 font-medium">
 
-  {/* Covered */}
-  <label className="flex items-center gap-2 cursor-pointer">
-    <input type="checkbox" className="peer hidden" />
+        {/* Covered */}
+        <label className="flex items-center gap-1.5 cursor-pointer select-none">
+          <input type="checkbox" className="peer hidden" />
+          <div className="w-4 h-4 rounded-full border-2 border-emerald-500 flex items-center justify-center flex-shrink-0 peer-checked:bg-emerald-500">
+            <Check
+              size={10}
+              strokeWidth={3.5}
+              className="text-white opacity-0 peer-checked:opacity-100 transition-opacity"
+            />
+          </div>
+          <span>Covered</span>
+        </label>
 
-    <div className="w-5 h-5 rounded-full border-2 border-green-500 flex items-center justify-center peer-checked:bg-green-500">
-      <Check
-        size={12}
-        strokeWidth={3}
-        className="text-white opacity-0 peer-checked:opacity-100"
-      />
-    </div>
+        {/* Partial */}
+        <label className="flex items-center gap-1.5 cursor-pointer select-none">
+          <input type="checkbox" className="peer hidden" />
+          <div className="w-4 h-4 rounded-full border-2 border-amber-500 flex items-center justify-center flex-shrink-0 peer-checked:bg-amber-500">
+            <Check
+              size={10}
+              strokeWidth={3.5}
+              className="text-white opacity-0 peer-checked:opacity-100 transition-opacity"
+            />
+          </div>
+          <span>Partial</span>
+        </label>
 
-    <span>Covered</span>
-  </label>
+        {/* Not Covered */}
+        <label className="flex items-center gap-1.5 cursor-pointer select-none">
+          <input type="checkbox" className="peer hidden" />
+          <div className="w-4 h-4 rounded-full border-2 border-slate-400 flex items-center justify-center flex-shrink-0 peer-checked:bg-slate-400">
+            <Check
+              size={10}
+              strokeWidth={3.5}
+              className="text-white opacity-0 peer-checked:opacity-100 transition-opacity"
+            />
+          </div>
+          <span>Not Covered</span>
+        </label>
 
-  {/* Partial */}
-  <label className="flex items-center gap-2 cursor-pointer">
-    <input type="checkbox" className="peer hidden" />
-
-    <div className="w-5 h-5 rounded-full border-2 border-yellow-500 flex items-center justify-center peer-checked:bg-yellow-500">
-      <Check
-        size={12}
-        strokeWidth={3}
-        className="text-white opacity-0 peer-checked:opacity-100"
-      />
-    </div>
-
-    <span>Partial</span>
-  </label>
-
-  {/* Not Covered */}
-  <label className="flex items-center gap-2 cursor-pointer">
-    <input type="checkbox" className="peer hidden" />
-
-    <div className="w-5 h-5 rounded-full border-2 border-gray-500 flex items-center justify-center peer-checked:bg-gray-500">
-      <Check
-        size={12}
-        strokeWidth={3}
-        className="text-white opacity-0 peer-checked:opacity-100"
-      />
-    </div>
-
-    <span>Not Covered</span>
-  </label>
-
-</div>
+      </div>
     </div>
   );
 };
