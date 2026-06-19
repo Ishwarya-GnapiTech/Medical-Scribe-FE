@@ -9,14 +9,14 @@ import {
   FiBell,
 } from "react-icons/fi";
 
-const topItems = [
+const topNavItems = [
   { icon: FiMic, label: "Scribe" },
   { icon: FiFileText, label: "Evidence" },
   { icon: FiCheckSquare, label: "Tasks" },
   { icon: FiGrid, label: "Templates" },
 ];
 
-const bottomItems = [
+const bottomNavItems = [
   { icon: FiClock, label: "History" },
   { icon: FiHelpCircle, label: "Help" },
   { icon: FiBell, label: "Alerts" },
@@ -24,57 +24,38 @@ const bottomItems = [
 
 const SidebarNav = () => {
   return (
-    <div
-      className="
-      w-[72px]
-      min-h-screen
-      bg-slate-100
-      border-r
-      border-slate-200
-      flex
-      flex-col
-      justify-between
-      items-center
-      py-4
-      "
-    >
-      {/* Top Section */}
-      <div className="flex flex-col items-center w-full">
+    <div className="w-[80px] h-screen bg-[#F8F8F8] border-r border-gray-200 flex flex-col justify-between items-center py-6">
+
+      {/* Top */}
+      <div className="flex flex-col items-center">
+
         {/* Logo */}
-        <div
-          className="
-          text-4xl
-          font-light
-          text-[#5A2730]
-          mb-8
-          "
-        >
+        <div className="text-[28px] font-light text-[#642734] mb-8">
           G
         </div>
 
-        {/* Create Session Button */}
+        {/* Plus */}
         <button
           className="
-          w-11
-          h-11
-          rounded-full
-          bg-[#5A2730]
+          w-12
+          h-12
+          rounded-xl
+          bg-[#642734]
           text-white
           flex
           items-center
           justify-center
-          mb-8
-          hover:bg-[#472027]
-          transition-all
-          duration-200
+          mb-10
+          hover:bg-[#53202B]
+          transition
           "
         >
           <FiPlus size={20} />
         </button>
 
-        {/* Main Navigation */}
-        <div className="flex flex-col items-center gap-2 w-full px-1">
-          {topItems.map((item, index) => {
+        {/* Main Nav */}
+        <div className="flex flex-col items-center gap-8">
+          {topNavItems.map((item, index) => {
             const Icon = item.icon;
 
             return (
@@ -84,26 +65,13 @@ const SidebarNav = () => {
                 flex
                 flex-col
                 items-center
-                justify-center
-                gap-1
-                w-full
-                py-2
-                rounded-lg
-                hover:bg-white
-                hover:shadow-sm
-                transition-all
-                duration-200
+                text-slate-700
+                hover:text-[#642734]
+                transition
                 "
               >
-                <Icon size={18} />
-
-                <span
-                  className="
-                  text-[10px]
-                  text-center
-                  font-medium
-                  "
-                >
+                <Icon size={20} />
+                <span className="text-[10px] mt-1">
                   {item.label}
                 </span>
               </button>
@@ -112,9 +80,10 @@ const SidebarNav = () => {
         </div>
       </div>
 
-      {/* Bottom Section */}
-      <div className="flex flex-col items-center gap-2 w-full px-1">
-        {bottomItems.map((item, index) => {
+      {/* Bottom */}
+      <div className="flex flex-col items-center gap-6">
+
+        {bottomNavItems.map((item, index) => {
           const Icon = item.icon;
 
           return (
@@ -124,50 +93,36 @@ const SidebarNav = () => {
               flex
               flex-col
               items-center
-              justify-center
-              gap-1
-              w-full
-              py-2
-              rounded-lg
-              hover:bg-white
-              hover:shadow-sm
-              transition-all
-              duration-200
+              text-slate-700
+              hover:text-[#642734]
+              transition
               "
             >
-              <Icon size={17} />
-
-              <span
-                className="
-                text-[10px]
-                text-center
-                font-medium
-                "
-              >
+              <Icon size={18} />
+              <span className="text-[10px] mt-1">
                 {item.label}
               </span>
             </button>
           );
         })}
 
-        {/* User Avatar */}
         <div
           className="
-          w-9
-          h-9
+          w-10
+          h-10
           rounded-full
-          bg-[#5A2730]
+          bg-[#642734]
           text-white
           flex
           items-center
           justify-center
-          font-semibold
           text-sm
-          mt-2
+          font-semibold
           "
         >
           J
         </div>
+
       </div>
     </div>
   );
