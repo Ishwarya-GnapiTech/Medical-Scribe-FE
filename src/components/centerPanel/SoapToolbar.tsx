@@ -1,55 +1,72 @@
 import React from "react";
-import { MoreHorizontal, Check, AlertCircle, HelpCircle, Copy, ChevronDown } from "lucide-react";
+import { 
+  LayoutGrid, 
+  Pencil, 
+  MoreHorizontal, 
+  Check, 
+  Circle, 
+  ChevronDown 
+} from "lucide-react";
 
 const SoapToolbar: React.FC = () => {
   return (
     <div className="flex items-center justify-between w-full px-4 py-3 bg-white border-b border-gray-100 select-none">
       
-      {/* Left Actions */}
-      <div className="flex items-center gap-1.5">
-        <div className="flex items-center bg-gray-50 border border-gray-200 rounded-lg p-0.5">
-          <button className="flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-md bg-white shadow-sm text-gray-800 border border-gray-200/50">
-            <span className="text-[11px] font-bold">⊞</span>
-            SOAP Note
+      {/* LEFT SIDE: Segmented Controls Group */}
+      <div className="flex items-center gap-2">
+        <div className="flex items-center border border-gray-200/60 rounded-xl p-0.5 bg-white shadow-sm">
+          <button className="flex items-center gap-1.5 px-3 py-1.5 text-[13px] font-semibold text-slate-800 bg-gray-50/80 rounded-lg">
+            <LayoutGrid size={13} className="text-slate-600 stroke-[2.5]" />
+            <span>SOAP Note</span>
           </button>
-          <button className="flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-md text-gray-400 hover:text-gray-700 transition-colors">
-            <span className="text-[11px]">✎</span>
-            Detailed
+          <div className="h-4 w-px bg-gray-200/80 mx-1" />
+          <button className="flex items-center gap-1.5 px-3 py-1.5 text-[13px] font-medium text-slate-400 hover:text-slate-700 transition-colors">
+            <Pencil size={13} className="stroke-[2]" />
+            <span>Detailed</span>
           </button>
         </div>
 
-        <button className="p-1.5 border border-gray-200 rounded-lg bg-white text-gray-400 hover:text-gray-600 hover:bg-gray-50 transition-colors">
+        <button className="flex items-center justify-center border border-gray-200/70 rounded-xl w-8 h-8 bg-white text-slate-400 hover:text-slate-600 shadow-sm transition-colors">
           <MoreHorizontal size={14} />
         </button>
       </div>
 
-      {/* Right Metrics & Copy (Matching Original Design) */}
-      <div className="flex items-center gap-3">
-        <div className="flex items-center gap-1.5 bg-green-50/50 border border-green-200/60 rounded-full pl-2 pr-1.5 py-0.5 text-[11px] font-medium text-green-700">
-          <Check size={12} className="stroke-[3] text-green-600" />
+      {/* RIGHT SIDE: Exact Status Badges & Solid Tone Copy Button */}
+      <div className="flex items-center gap-2">
+        
+        {/* Covered Metric Badge */}
+        <div className="flex items-center gap-2 px-3 py-1 bg-white border border-gray-200/70 rounded-xl text-[13px] font-medium text-slate-700 shadow-sm h-8">
+          <Check size={14} className="text-emerald-500 stroke-[3]" />
           <span>Covered</span>
-          <span className="text-green-700 font-semibold bg-green-100/70 px-1.5 py-0.5 rounded-full text-[10px] ml-0.5">12</span>
+          <span className="bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded-md text-[11px] font-bold ml-0.5">
+            12
+          </span>
         </div>
 
-        <div className="flex items-center gap-1.5 bg-amber-50/50 border border-amber-200/60 rounded-full pl-2 pr-1.5 py-0.5 text-[11px] font-medium text-amber-600">
-          <HelpCircle size={12} className="stroke-[2.5] text-amber-500" />
+        {/* Partial Metric Badge */}
+        <div className="flex items-center gap-2 px-3 py-1 bg-white border border-gray-200/70 rounded-xl text-[13px] font-medium text-slate-700 shadow-sm h-8">
+          <Circle size={12} className="text-amber-500 stroke-[3] fill-transparent" />
           <span>Partial</span>
-          <span className="text-amber-700 font-semibold bg-amber-100/70 px-1.5 py-0.5 rounded-full text-[10px] ml-0.5">3</span>
+          <span className="bg-amber-50 text-amber-700 px-1.5 py-0.5 rounded-md text-[11px] font-bold ml-0.5">
+            3
+          </span>
         </div>
 
-        <div className="flex items-center gap-1.5 bg-rose-50/50 border border-rose-200/60 rounded-full pl-2 pr-1.5 py-0.5 text-[11px] font-medium text-rose-600">
-          <AlertCircle size={12} className="stroke-[2.5] text-rose-500" />
+        {/* Missing Metric Badge */}
+        <div className="flex items-center gap-2 px-3 py-1 bg-white border border-gray-200/70 rounded-xl text-[13px] font-medium text-slate-700 shadow-sm h-8">
+          <Circle size={12} className="text-rose-400 stroke-[3] fill-transparent" />
           <span>Missing</span>
-          <span className="text-rose-700 font-semibold bg-rose-100/70 px-1.5 py-0.5 rounded-full text-[10px] ml-0.5">5</span>
+          <span className="bg-rose-50 text-rose-600 px-1.5 py-0.5 rounded-md text-[11px] font-bold ml-0.5">
+            5
+          </span>
         </div>
 
-        <div className="h-4 w-px bg-gray-200 mx-0.5" />
-
-        <button className="flex items-center gap-1.5 px-3 py-1 text-xs font-medium text-gray-600 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 transition-colors">
-          <Copy size={12} className="text-gray-400" />
+        {/* Clean Warm-Toned Solid Copy Dropdown */}
+        <button className="flex items-center gap-1.5 px-3 py-1 bg-[#f5ebe6] text-slate-800 text-[13px] font-semibold rounded-xl hover:bg-[#ebdcd4] transition-colors h-8 ml-1 shadow-sm">
           <span>Copy</span>
-          <ChevronDown size={12} className="text-gray-400 ml-0.5" />
+          <ChevronDown size={12} className="text-slate-600 stroke-[2.5]" />
         </button>
+
       </div>
 
     </div>
