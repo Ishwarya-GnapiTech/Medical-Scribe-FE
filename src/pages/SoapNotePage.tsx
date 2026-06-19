@@ -1,3 +1,5 @@
+import Sidebar from "../components/Sidebar/Sidebar";
+
 import PatientHeader from "../components/header/PatientHeader";
 import NavigationTabs from "../components/header/NavigationTabs";
 
@@ -8,21 +10,24 @@ import PromptInput from "../components/centerPanel/PromptInput";
 
 import MissedPrompts from "../components/rightSidebar/MissedPrompts";
 import CoverageChecklist from "../components/rightSidebar/CoverageChecklist";
-import Sidebar from "../components/Sidebar/Sidebar";
 
 const SoapNotePage = () => {
   return (
-    <div className="min-h-screen bg-[#F7F8FA]">
-      <div className="max-w-[1800px] mx-auto">
+    <div className="flex h-screen bg-[#F7F8FA]">
 
-        <Sidebar />
+      {/* LEFT SIDEBAR */}
+      <Sidebar />
+
+      {/* MAIN CONTENT */}
+      <div className="flex-1 overflow-y-auto">
+
         {/* Header */}
         <PatientHeader />
 
         {/* Navigation */}
         <NavigationTabs />
 
-        {/* Main Content */}
+        {/* Page Content */}
         <div className="px-6 py-5">
 
           {/* Status Bar */}
@@ -34,7 +39,7 @@ const SoapNotePage = () => {
             {/* LEFT SECTION */}
             <div className="flex flex-col">
 
-              {/* SOAP Editor Card */}
+              {/* SOAP Editor */}
               <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
                 <SoapToolbar />
                 <SoapEditor />
@@ -50,20 +55,18 @@ const SoapNotePage = () => {
             {/* RIGHT SIDEBAR */}
             <div className="flex flex-col gap-6">
 
-              <div className="shadow-sm">
-                <MissedPrompts />
-              </div>
+              <MissedPrompts />
 
-              <div className="shadow-sm">
-                <CoverageChecklist />
-              </div>
+              <CoverageChecklist />
 
             </div>
 
           </div>
 
         </div>
+
       </div>
+
     </div>
   );
 };

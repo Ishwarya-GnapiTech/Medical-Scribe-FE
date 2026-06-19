@@ -4,6 +4,7 @@ type Props = {
   date: string;
   time: string;
 };
+
 const SessionItem = ({
   initials,
   patientName,
@@ -15,70 +16,44 @@ const SessionItem = ({
       className="
       flex
       items-center
-      gap-3
-      p-4
+      gap-4
+      px-3
+      py-4
       rounded-xl
       cursor-pointer
-
-      hover:bg-[#F6EFEF]
-      hover:shadow-sm
-
+      hover:bg-[#F4ECEC]
       transition-all
       duration-200
       "
     >
       <div
         className="
-        w-11
-        h-11
+        w-10
+        h-10
         rounded-full
         border
         border-gray-300
-
         flex
         items-center
         justify-center
-
+        text-slate-700
         text-sm
-        font-medium
-        text-gray-700
         "
       >
         {initials}
       </div>
 
       <div>
-        <h3
-          className="
-          text-[16px]
-          font-semibold
-          text-gray-800
-          "
-        >
+        <h3 className="font-semibold text-[15px] text-slate-800">
           {patientName}
         </h3>
 
-        <p
-          className="
-          text-[14px]
-          text-gray-500
-          mt-1
-          "
-        >
-            <div>
-  <h3 className="font-semibold text-gray-800">
-    {patientName}
-  </h3>
+        <p className="text-[12px] text-slate-500">
+          {date}
+        </p>
 
-  <p className="text-sm text-gray-500">
-    {date}
-  </p>
-
-  <p className="text-sm text-gray-400">
-    {time}
-  </p>
-</div>
-          
+        <p className="text-[12px] text-slate-500">
+          {time}
         </p>
       </div>
     </div>
