@@ -10,11 +10,13 @@ type Session = {
 
 type Props = {
   sessions: Session[];
+  selectedSessionId?: number;
+  onSelectSession?: (session: Session) => void;
 };
 
-const SessionList = ({ sessions }: Props) => {
+const SessionList = ({ sessions, selectedSessionId, onSelectSession }: Props) => {
   return (
-    <div className="mt-4 flex flex-col gap-2 px-3">
+    <div className="mt-4 flex flex-col gap-2">
       {sessions.map((session) => (
         <SessionItem
           key={session.id}
@@ -22,6 +24,8 @@ const SessionList = ({ sessions }: Props) => {
           patientName={session.patientName}
           date={session.date}
           time={session.time}
+          isSelected={session.id === selectedSessionId}
+          onClick={() => onSelectSession?.(session)}
         />
       ))}
     </div>
