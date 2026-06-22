@@ -10,27 +10,27 @@ import {
 } from "react-icons/fi";
 
 const topNavItems = [
-  { icon: FiMic, label: "Scribe" },
-  { icon: FiFileText, label: "Evidence" },
-  { icon: FiCheckSquare, label: "Tasks" },
-  { icon: FiGrid, label: "Templates" },
+  { icon: FiMic, label: "Scribe", active: true },
+  { icon: FiFileText, label: "Evidence", active: false },
+  { icon: FiCheckSquare, label: "Tasks", active: false },
+  { icon: FiGrid, label: "Templates", active: false },
 ];
 
 const bottomNavItems = [
   { icon: FiClock, label: "History" },
   { icon: FiHelpCircle, label: "Help" },
-  { icon: FiBell, label: "Alerts" },
+  { icon: FiBell, label: "" }, // No label for alerts
 ];
 
 const SidebarNav = () => {
   return (
-    <div className="w-[80px] h-screen bg-[#F8F8F8] border-r border-gray-200 flex flex-col justify-between items-center py-6">
+    <div className="w-[80px] h-full bg-[#F8F8F8] border-r border-gray-200 flex flex-col items-center py-6 shrink-0 overflow-y-auto no-scrollbar">
 
       {/* Top */}
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center w-full">
 
         {/* Logo */}
-        <div className="text-[28px] font-light text-[#642734] mb-8">
+        <div className="text-[26px] font-medium text-[#4B1D31] mb-6">
           G
         </div>
 
@@ -39,39 +39,36 @@ const SidebarNav = () => {
           className="
           w-12
           h-12
-          rounded-xl
-          bg-[#642734]
+          rounded-[14px]
+          bg-[#5A2533]
           text-white
           flex
           items-center
           justify-center
-          mb-10
-          hover:bg-[#53202B]
+          mb-8
+          hover:bg-[#431B26]
           transition
+          shadow-sm
           "
         >
-          <FiPlus size={20} />
+          <FiPlus size={22} strokeWidth={2} />
         </button>
 
         {/* Main Nav */}
-        <div className="flex flex-col items-center gap-8">
+        <div className="flex flex-col items-center gap-4 w-full">
           {topNavItems.map((item, index) => {
             const Icon = item.icon;
 
             return (
               <button
                 key={index}
-                className="
-                flex
-                flex-col
-                items-center
-                text-slate-700
-                hover:text-[#642734]
-                transition
-                "
+                className={`
+                flex flex-col items-center justify-center w-[64px] rounded-xl py-3 transition gap-1.5
+                ${item.active ? 'text-[#365A84] bg-[#F0F4F8]' : 'text-slate-500 hover:text-[#5A2533] hover:bg-gray-100'}
+                `}
               >
-                <Icon size={20} />
-                <span className="text-[10px] mt-1">
+                <Icon size={20} strokeWidth={1.5} />
+                <span className="text-[10px] font-medium leading-none">
                   {item.label}
                 </span>
               </button>
@@ -81,7 +78,7 @@ const SidebarNav = () => {
       </div>
 
       {/* Bottom */}
-      <div className="flex flex-col items-center gap-6">
+      <div className="flex flex-col items-center gap-4 w-full mt-auto pt-8">
 
         {bottomNavItems.map((item, index) => {
           const Icon = item.icon;
@@ -89,19 +86,17 @@ const SidebarNav = () => {
           return (
             <button
               key={index}
-              className="
-              flex
-              flex-col
-              items-center
-              text-slate-700
-              hover:text-[#642734]
-              transition
-              "
+              className={`
+              flex flex-col items-center justify-center w-[64px] rounded-xl py-2.5 text-slate-500 hover:text-[#5A2533] hover:bg-gray-100 transition
+              ${item.label ? 'gap-1.5' : ''}
+              `}
             >
-              <Icon size={18} />
-              <span className="text-[10px] mt-1">
-                {item.label}
-              </span>
+              <Icon size={20} strokeWidth={1.5} />
+              {item.label && (
+                <span className="text-[10px] font-medium leading-none">
+                  {item.label}
+                </span>
+              )}
             </button>
           );
         })}
@@ -111,13 +106,15 @@ const SidebarNav = () => {
           w-10
           h-10
           rounded-full
-          bg-[#642734]
+          bg-[#33111C]
           text-white
           flex
           items-center
           justify-center
           text-sm
           font-semibold
+          shadow-sm
+          mt-2
           "
         >
           J

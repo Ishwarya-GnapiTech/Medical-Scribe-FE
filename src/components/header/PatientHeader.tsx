@@ -8,7 +8,12 @@ import {
   AudioLines 
 } from "lucide-react";
 
-const PatientHeader: React.FC = () => {
+type Props = {
+  initials?: string;
+  patientName?: string;
+};
+
+const PatientHeader: React.FC<Props> = ({ initials = "KI", patientName = "Kodawa, Issac" }) => {
   // Action state managers
   const [isResumeOpen, setIsResumeOpen] = useState<boolean>(false);
   const [selectedDocument, setSelectedDocument] = useState<string>("Resume");
@@ -40,8 +45,8 @@ const PatientHeader: React.FC = () => {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: "Patient Note - Kodawa, Issac",
-          text: "Reviewing clinical transcription summary data for patient Kodawa, Issac.",
+          title: `Patient Note - ${patientName}`,
+          text: `Reviewing clinical transcription summary data for patient ${patientName}.`,
           url: window.location.href,
         });
       } catch (error) {
@@ -64,11 +69,11 @@ const PatientHeader: React.FC = () => {
         
         {/* Left Profile Identity Container Block */}
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center font-semibold text-gray-500 text-sm border border-gray-200/60">
-            KI
+          <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center font-semibold text-gray-500 text-sm border border-gray-200/60 shrink-0">
+            {initials}
           </div>
           <div>
-            <h1 className="text-base font-bold text-gray-900 leading-tight tracking-tight">Kodawa, Issac</h1>
+            <h1 className="text-base font-bold text-gray-900 leading-tight tracking-tight">{patientName}</h1>
             <p className="text-xs font-medium text-gray-400 mt-0.5">ED, L penile sens</p>
           </div>
         </div>

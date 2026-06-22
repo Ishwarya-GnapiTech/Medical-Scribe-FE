@@ -3,7 +3,21 @@ import SidebarNav from "./SidebarNav";
 import SessionList from "./SessionList";
 import { sessions } from "./mockData";
 
-const Sidebar = () => {
+type Session = {
+  id: number;
+  initials: string;
+  patientName: string;
+  date: string;
+  time: string;
+};
+
+type Props = {
+  selectedSessionId?: number;
+  onSelectSession?: (session: Session) => void;
+  width?: number;
+};
+
+const Sidebar = ({ selectedSessionId, onSelectSession, width = 280 }: Props) => {
   const [tab, setTab] = useState("past");
 
   const filteredSessions = sessions.filter(
@@ -15,7 +29,7 @@ const Sidebar = () => {
 
       <SidebarNav />
 
-      <div className="w-[280px] bg-[#FAF7F5] flex flex-col overflow-hidden">
+      <div style={{ width: `${width}px` }} className="bg-[#FAF7F5] flex flex-col overflow-hidden transition-none">
 
         {/* New Session */}
         <div className="p-6">
@@ -74,7 +88,11 @@ const Sidebar = () => {
         </div>
 
         <div className="flex-1 overflow-y-auto px-4 pb-20">
-          <SessionList sessions={filteredSessions} />
+          <SessionList 
+            sessions={filteredSessions} 
+            selectedSessionId={selectedSessionId}
+            onSelectSession={onSelectSession}
+          />
         </div>
 
       </div>

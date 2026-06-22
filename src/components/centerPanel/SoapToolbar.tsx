@@ -41,10 +41,10 @@ const SoapToolbar: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center justify-between w-full px-4 py-3 bg-white border-b border-gray-100 select-none">
+    <div className="flex flex-wrap items-center justify-between w-full px-4 py-3 bg-white border-b border-gray-100 select-none gap-3">
       
       {/* LEFT SIDE: Everything Unified Into One Single Outer Box */}
-      <div className="flex items-center border border-gray-200/60 rounded-xl p-0.5 bg-white shadow-sm h-9">
+      <div className="flex flex-shrink-0 items-center border border-gray-200/60 rounded-xl p-0.5 bg-white shadow-sm h-9">
         {/* SOAP Note Active Tab */}
         <button className="flex items-center gap-1.5 px-3 h-full text-[13px] font-semibold text-slate-800 bg-gray-50/80 rounded-lg">
           <LayoutGrid size={13} className="text-slate-600 stroke-[2.5]" />
@@ -70,17 +70,17 @@ const SoapToolbar: React.FC = () => {
       </div>
 
       {/* RIGHT SIDE: Horizontal Status Badges and Copy Action button with perfect clearance gap */}
-      <div className="flex items-center gap-2 pl-4">
+      <div className="flex flex-wrap items-center gap-2">
         
         {/* Covered Tag */}
         <button 
           onClick={() => handleBadgeAction("covered")}
-          className={`flex items-center gap-2 px-3 h-8 bg-white border rounded-xl text-[13px] font-semibold transition-all shadow-sm cursor-pointer ${
+          className={`flex items-center gap-1.5 px-2.5 sm:px-3 h-8 bg-white border rounded-xl text-[12px] sm:text-[13px] font-semibold transition-all shadow-sm cursor-pointer ${
             activeFilter === "covered" ? "border-emerald-500 bg-emerald-50/10 text-slate-900" : "border-gray-200/80 text-slate-700 hover:bg-slate-50"
           }`}
         >
           <Check size={13} className="text-emerald-500 stroke-[3.5]" />
-          <span className="text-slate-700">Covered</span>
+          <span className="text-slate-700 hidden sm:inline">Covered</span>
           <span className="bg-gray-100 text-slate-600 px-1.5 py-0.5 rounded-md text-[11px] font-bold ml-0.5 min-w-[18px] text-center">
             {counts.covered}
           </span>
@@ -89,12 +89,12 @@ const SoapToolbar: React.FC = () => {
         {/* Partial Tag */}
         <button 
           onClick={() => handleBadgeAction("partial")}
-          className={`flex items-center gap-2 px-3 h-8 bg-white border rounded-xl text-[13px] font-semibold transition-all shadow-sm cursor-pointer ${
+          className={`flex items-center gap-1.5 px-2.5 sm:px-3 h-8 bg-white border rounded-xl text-[12px] sm:text-[13px] font-semibold transition-all shadow-sm cursor-pointer ${
             activeFilter === "partial" ? "border-amber-500 bg-amber-50/10 text-slate-900" : "border-gray-200/80 text-slate-700 hover:bg-slate-50"
           }`}
         >
           <Circle size={11} className="text-amber-500 stroke-[3.5]" />
-          <span className="text-slate-700">Partial</span>
+          <span className="text-slate-700 hidden sm:inline">Partial</span>
           <span className="bg-amber-50 text-amber-700 px-1.5 py-0.5 rounded-md text-[11px] font-bold ml-0.5 min-w-[18px] text-center">
             {counts.partial}
           </span>
@@ -103,19 +103,19 @@ const SoapToolbar: React.FC = () => {
         {/* Missing Tag */}
         <button 
           onClick={() => handleBadgeAction("missing")}
-          className={`flex items-center gap-2 px-3 h-8 bg-white border rounded-xl text-[13px] font-semibold transition-all shadow-sm cursor-pointer ${
+          className={`flex items-center gap-1.5 px-2.5 sm:px-3 h-8 bg-white border rounded-xl text-[12px] sm:text-[13px] font-semibold transition-all shadow-sm cursor-pointer ${
             activeFilter === "missing" ? "border-rose-400 bg-rose-50/10 text-slate-900" : "border-gray-200/80 text-slate-700 hover:bg-slate-50"
           }`}
         >
           <Circle size={11} className="text-rose-400 stroke-[3.5]" />
-          <span className="text-slate-700">Missing</span>
+          <span className="text-slate-700 hidden sm:inline">Missing</span>
           <span className="bg-rose-50 text-rose-600 px-1.5 py-0.5 rounded-md text-[11px] font-bold ml-0.5 min-w-[18px] text-center">
             {counts.missing}
           </span>
         </button>
 
         {/* Action Dropdown Menu Control */}
-        <div className="relative">
+        <div className="relative ml-auto sm:ml-0">
           <button 
             onClick={() => setIsCopyOpen(!isCopyOpen)}
             className="flex items-center gap-1.5 px-3.5 h-8 bg-[#f5ebe6] text-slate-800 text-[13px] font-bold rounded-xl hover:bg-[#ebdcd4] transition-colors shadow-sm cursor-pointer ml-0.5"
